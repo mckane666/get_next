@@ -12,56 +12,81 @@
 
 #include "get_next_line.h"
 
-void	ft_putchar_fd(char c, int fd) // remove
-{
-	write(fd, &c, 1);
-}
-
-void	ft_putstr_fd(char *str, int fd)
-{
-	int i;
-
-	i = 0;
-	if (!str)
-		return ;
-	while (str[i] != '\0')
-	{
-		i++;
-	}
-	write(fd, str, i);
-}
-
-void	ft_putendl_fd(char *str, int fd)
-{
-	if (!str)
-		return ;
-	ft_putstr_fd(str, fd);
-	write(fd, "\n", 1);
-}
-
-void	ft_putnbr_fd(int nb, int fd)
-{
-	long int l;
-
-	l = nb;
-	if (nb < 0)
-	{
-		ft_putchar_fd('-', fd);
-		l = -l;
-	}
-	if (nb / 10)
-	{
-		ft_putnbr_fd(l / 10, fd);
-	}
-	ft_putchar_fd(l % 10 + '0', fd);
-}
-
 int	ft_strlen(const char *str)
 {
 	int	i;
 
 	i = 0;
-	while (str[i] != '\0')
+	while (str[i] != 0)
 		i++;
 	return (i);
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	int		i;
+	int		t;
+	char	*joined;
+
+	if (!s1 || !s2)
+		return (0);
+	if (!(joined = (char *)malloc(sizeof(char)
+	* (ft_strlen(s1) + ft_strlen(s2)) + 1)))
+		return (NULL);
+	*joined = 0;
+	i = 0;
+	while (s1[i] != '\0')
+	{
+		joined[i] = s1[i];
+		i++;
+	}
+	t = 0;
+	while (s2[t] != '\0')
+	{
+		joined[i + t] = s2[t];
+		t++;
+	}
+	joined[i + t] = '\0';
+	return (joined);
+}
+
+char	*ft_strdup(char *src)
+{
+	int		i;
+	int		j;
+	char	*copy;
+
+	i = 0;
+	while (src[i] != 0)
+	{
+		i++;
+	}
+	copy = (char*)malloc(sizeof(char) * (i + 1));
+	if (!copy)
+	{
+		return (0);
+	}
+	j = 0;
+	while (src[j] != 0)
+	{
+		copy[j] = src[j];
+		j++;
+	}
+	copy[j] = '\0';
+	return (copy);
+}
+
+char	*ft_strchr(const char *s, int n)
+{
+	while (*s)
+	{
+		if (*s == n)
+		{
+			return ((char *)s);
+		}
+		s++;
+	}
+	if (*s == 0 && n == 0)
+		return ((char *)s);
+	return (0);
 }

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhenriqu <jhenriqu@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/08 12:25:41 by jhenriqu          #+#    #+#             */
-/*   Updated: 2021/01/11 12:26:33 by jhenriqu         ###   ########.fr       */
+/*   Created: 2021/01/20 14:19:36 by jhenriqu          #+#    #+#             */
+/*   Updated: 2021/01/20 14:20:06 by jhenriqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+//#include <sys/types.h>
+//#include <sys/stat.h>
 
 #ifndef BUFFER_SIZE
-		int BUFFER_SIZE = 0; //
+# define BUFFER_SIZE 3
 #endif
 
 int		get_next_line(int fd, char **line);
-void	ft_putchar_fd(char c, int fd);
-void	ft_putstr_fd(char *str, int fd);
-void	ft_putendl_fd(char *str, int fd);
-void	ft_putnbr_fd(int nb, int fd);
-int	ft_strlen(const char *str);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strdup(char *src);
+char	*ft_strchr(const char *s, int n);
+int		ft_strlen(const char *str);
 #endif
-
