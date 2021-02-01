@@ -23,8 +23,6 @@ char	*cutnew(char *new_line, char **line)
 		len++;
 	if (new_line[len] == '\n')
 	{
-		if (new_line[len + 1] == '\n')
-			*line = ft_substr(new_line, 0, len + 1);
 		*line = ft_substr(new_line, 0, len);
 		tempo = ft_strdup(&new_line[len + 1]);
 		free(new_line);
@@ -110,4 +108,5 @@ int		main(int argc, char **argv)
 	printf("%d", get_next_line(fd, &line));
 	printf("line-->%s\n",line);
 	free(line);
+
 }
