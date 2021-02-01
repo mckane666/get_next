@@ -13,35 +13,6 @@
 #include "get_next_line.h"
 #include <stdio.h>
 
-/*
-** recupera valores"perdidos" do buf depois do '\n'
-*/
-/*
-char	*add_to_new(char *str, int len) //Alone, twenty million years from my place.\0A_
-{
-	int		i;
-	char	*temp;
-	int		j;
-
-	i = 0;
-	j = 0;
-
-	if (!(temp = malloc(sizeof(char) * (len + 1))))
-		return (0);
-	while (str[len + 1] != '\0') // tiro na tola!!
-	{
-		temp[i] = str[len];
-		i++;
-		len++;
-	}
-	temp[i] = '\0';
-	return (temp);
-}
-
-//Alone, twenty million years from my place.\n
-//Alone, twenty million years\n
-//\n
-//\0*/
 char	*cutnew(char *new_line, char **line)
 {
 	char	*tempo;
@@ -52,6 +23,8 @@ char	*cutnew(char *new_line, char **line)
 		len++;
 	if (new_line[len] == '\n')
 	{
+		if (new_line[len + 1] == '\n')
+			*line = ft_substr(new_line, 0, len + 1);
 		*line = ft_substr(new_line, 0, len);
 		tempo = ft_strdup(&new_line[len + 1]);
 		free(new_line);
@@ -68,7 +41,9 @@ int		get_next_line(int fd, char **line)
 	static char	*new_line[4096];
 	char		buf[BUFFER_SIZE + 1];
 	char		*temp;
+	int			check;
 
+	check = 0;
 	if (((fd < 0 && fd < 3) || !line || BUFFER_SIZE <= 0))
 		return (-1);
 	while ((r = read(fd, buf, BUFFER_SIZE)) > 0)
@@ -85,12 +60,14 @@ int		get_next_line(int fd, char **line)
 				break ;
 		}
 	}
-	if (new_line[fd] == NULL && r > 0)
-		return (1);
+	if (ft_strchr(new_line[fd], '\n'))
+		check = 1;
 	new_line[fd] = cutnew(new_line[fd], line);
 	if (r < 0)
 		return (-1);
-	return (!(r == 0 && (!new_line[fd] || new_line[fd][0] == '\0')));
+	if ((r == 0 && (!new_line[fd] || new_line[fd][0] == '\0')) && !check)
+		return (0);
+	return (1);
 }
 
 
@@ -100,9 +77,6 @@ int		main(int argc, char **argv)
 	char	*line;
 
 	fd = open(argv[1], O_RDONLY);
-	printf("%d ", get_next_line(fd, &line));
-	printf("line-->%s\n",line);
-	free(line);
 	printf("%d", get_next_line(fd, &line));
 	printf("line-->%s\n",line);
 	free(line);
@@ -135,14 +109,5 @@ int		main(int argc, char **argv)
 	free(line);
 	printf("%d", get_next_line(fd, &line));
 	printf("line-->%s\n",line);
-	free(line);printf("%d", get_next_line(fd, &line));
-	printf("line-->%s\n",line);
 	free(line);
-	printf("%d", get_next_line(fd, &line));
-	printf("line-->%s\n",line);
-	free(line);
-	printf("%d", get_next_line(fd, &line));
-	printf("line-->%s\n",line);
-	free(line);
-
 }
