@@ -73,10 +73,14 @@ int		get_next_line(int fd, char **line)
 int		main(int argc, char **argv)
 {
 	int		fd;
+	int		fd2; //second file
 	char	*line;
 	int 	i;
 
+	fd2 = 0;
 	fd = open(argv[1], O_RDONLY);
+	if (argc == 3)
+		fd2 = open(argv[2], O_RDONLY); //second file
 
 	while ((i = get_next_line(fd, &line)) > 0)
 	{
@@ -84,14 +88,26 @@ int		main(int argc, char **argv)
 		printf("line-->%s\n",line);
 		free(line);
 	}
-	free(line);
-	if ((i = get_next_line(fd, &line)) == 0)
+	if (argc == 3)
+	{
+		while ((i = get_next_line(fd2, &line)) > 0) //second file
+		{
+			printf("%d", i);
+			printf("line-->%s\n",line);
+			free(line);
+		}
+		printf("%d", i);
+		printf("line-->%s\n",line);
+		free(line);
+		close(fd);
+	}
+	else
 	{
 		printf("%d", i);
 		printf("line-->%s\n",line);
 		free(line);
+		close(fd2);
 	}
-
 
 /*
 
