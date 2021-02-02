@@ -28,8 +28,9 @@ char	*cutnew(char *new_line, char **line)
 		free(new_line);
 		new_line = tempo;
 	}
-	else
+	else if (new_line[len] == '\0')
 		*line = ft_strdup(new_line);
+		
 	return (new_line);
 }
 
@@ -63,7 +64,7 @@ int		get_next_line(int fd, char **line)
 	new_line[fd] = cutnew(new_line[fd], line);
 	if (r < 0)
 		return (-1);
-	if ((r == 0 && (!new_line[fd] || new_line[fd][0] == '\0')) && !check)
+	if ((r == 0 && (!new_line[fd] || ft_strchr(new_line[fd], '\0'))) && !check)
 		return (0);
 	return (1);
 }
@@ -73,40 +74,205 @@ int		main(int argc, char **argv)
 {
 	int		fd;
 	char	*line;
+	int 	i;
 
 	fd = open(argv[1], O_RDONLY);
-	printf("%d", get_next_line(fd, &line));
-	printf("line-->%s\n",line);
-	free(line);
-	printf("%d", get_next_line(fd, &line));
-	printf("line-->%s\n",line);
-	free(line);
-	printf("%d", get_next_line(fd, &line));
-	printf("line-->%s\n",line);
-	free(line);
-	printf("%d", get_next_line(fd, &line));
-	printf("line-->%s\n",line);
-	free(line);
-	printf("%d", get_next_line(fd, &line));
-	printf("line-->%s\n",line);
-	free(line);
-	printf("%d", get_next_line(fd, &line));
-	printf("line-->%s\n",line);
-	free(line);
-	printf("%d", get_next_line(fd, &line));
-	printf("line-->%s\n",line);
-	free(line);
-	printf("%d", get_next_line(fd, &line));
-	printf("line-->%s\n",line);
-	free(line);
-	printf("%d", get_next_line(fd, &line));
-	printf("line-->%s\n",line);
-	free(line);
-	printf("%d", get_next_line(fd, &line));
-	printf("line-->%s\n",line);
-	free(line);
-	printf("%d", get_next_line(fd, &line));
-	printf("line-->%s\n",line);
-	free(line);
 
+	while ((i = get_next_line(fd, &line)) > 0)
+	{
+		printf("%d", i);
+		printf("line-->%s\n",line);
+		free(line);
+	}
+	free(line);
+	if ((i = get_next_line(fd, &line)) == 0)
+	{
+		printf("%d", i);
+		printf("line-->%s\n",line);
+		free(line);
+	}
+
+
+/*
+
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);
+	printf("%d", get_next_line(fd, &line));
+	printf("line-->%s\n",line);
+	free(line);*/
 }
