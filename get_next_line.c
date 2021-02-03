@@ -36,6 +36,7 @@ char	*cutnew(char *new_line, char **line)
 	else if (new_line[len] == '\0')
 	{
 		*line = ft_strdup(new_line);
+		free(new_line);
 		new_line = ft_strdup("");
 	}
 	return (new_line);
@@ -98,6 +99,12 @@ int		main(int argc, char **argv)
 		if (line)
 			free(line);
 	}
+	printf("%d", i);
+	printf("line-->%s\n",line);
+	if (line)
+		free(line);
+	close(fd);
+
 	if (argc > 2)
 	{
 		while ((i = get_next_line(fd2, &line)) > 0) //second file
@@ -107,14 +114,6 @@ int		main(int argc, char **argv)
 			if (line)
 				free(line);
 		}
-		printf("%d", i);
-		printf("line-->%s\n",line);
-		if (line)
-			free(line);
-		close(fd);
-	}
-	else
-	{
 		printf("%d", i);
 		printf("line-->%s\n",line);
 		if (line)
