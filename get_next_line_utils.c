@@ -22,7 +22,7 @@ int		ft_strlen(const char *str)
 	return (i);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	int		i;
 	int		t;
@@ -47,6 +47,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		t++;
 	}
 	joined[i + t] = '\0';
+	free(s1);
 	return (joined);
 }
 
@@ -78,6 +79,8 @@ char	*ft_strdup(char *src)
 
 char	*ft_strchr(const char *s, int n)
 {
+	if (!s)
+		return (0);
 	while (*s)
 	{
 		if (*s == n)
@@ -91,7 +94,7 @@ char	*ft_strchr(const char *s, int n)
 	return (0);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char *s, unsigned int start, size_t len)
 {
 	char	*sbs;
 	int		i;
