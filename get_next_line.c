@@ -79,8 +79,9 @@ int		get_next_line(int fd, char **line)
 	new_line[fd] = cutnew(new_line[fd], line);
 	return (r_result(new_line[fd], next.r, next.check));
 }
-/*
-int		main(int argc, char **argv)
+
+/* 
+ int		main(int argc, char **argv)
 {
 
 	int		fd;
@@ -120,5 +121,4 @@ int		main(int argc, char **argv)
 			free(line);
 		close(fd2);
 	}
-}
-*/
+} */
