@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhenriqu <jhenriqu@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 12:24:42 by jhenriqu          #+#    #+#             */
-/*   Updated: 2021/02/03 02:34:32 by jhenriqu         ###   ########.fr       */
+/*   Updated: 2021/02/04 18:46:48 by jhenriqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*cutnew(char *new_line, char **line)
 	return (new_line);
 }
 
-int		r_result(char *new_line, int r, int check)
+int	r_result(char *new_line, int r, int check)
 {
 	if (r < 0)
 		return (-1);
@@ -51,27 +51,37 @@ int		r_result(char *new_line, int r, int check)
 	return (1);
 }
 
-int		get_next_line(int fd, char **line)
+char	*thanku_norm(char *buf, char *new_line)
+{
+	char*temp;
+
+	temp = ft_strjoin(new_line, buf);
+	free(new_line);
+	new_line = temp;
+	return (new_line);
+}
+
+int	get_next_line(int fd, char **line)
 {
 	t_gnl		next;
 	static char	*new_line[4096];
 
 	next.check = 0;
-	if (!(next.buf = malloc(sizeof(char *) * BUFFER_SIZE + 1)) || (fd < 0 ||
-	fd == 1 || fd == 2 || !line || BUFFER_SIZE <= 0 || read(fd, 0, 0) == -1))
+	next.buf = malloc(sizeof(char *) * BUFFER_SIZE + 1);
+	if (!(next.buf) || (fd < 0 || fd == 1 || fd == 2 || !line
+		|| BUFFER_SIZE <= 0 || read(fd, 0, 0) == -1))
 		return (-1);
-	while ((next.r = read(fd, next.buf, BUFFER_SIZE)) > 0)
+	next.r = read(fd, next.buf, BUFFER_SIZE);
+	while (next.r > 0)
 	{
 		next.buf[next.r] = '\0';
 		if (!new_line[fd])
 			new_line[fd] = ft_strdup(next.buf);
 		else
-		{
-			next.temp = ft_strjoin(new_line[fd], next.buf);
-			new_line[fd] = next.temp;
-		}
+			new_line[fd] = thanku_norm(next.buf, new_line[fd]);
 		if (ft_strchr(next.buf, '\n'))
 			break ;
+		next.r = read(fd, next.buf, BUFFER_SIZE);
 	}
 	free(next.buf);
 	if (ft_strchr(new_line[fd], '\n'))
@@ -79,8 +89,7 @@ int		get_next_line(int fd, char **line)
 	new_line[fd] = cutnew(new_line[fd], line);
 	return (r_result(new_line[fd], next.r, next.check));
 }
-
-/* 
+/*
  int		main(int argc, char **argv)
 {
 
@@ -121,4 +130,4 @@ int		get_next_line(int fd, char **line)
 			free(line);
 		close(fd2);
 	}
-} */
+}*/

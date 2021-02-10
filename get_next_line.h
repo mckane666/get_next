@@ -6,7 +6,7 @@
 /*   By: jhenriqu <jhenriqu@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 14:19:36 by jhenriqu          #+#    #+#             */
-/*   Updated: 2021/01/20 14:20:06 by jhenriqu         ###   ########.fr       */
+/*   Updated: 2021/02/09 23:30:49 by jhenriqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #  define BUFFER_SIZE 0
 # endif
 
-typedef struct	s_get_next_line
+typedef struct s_get_next_line
 {
 	int			r;
 	char		*buf;

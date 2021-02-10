@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhenriqu <jhenriqu@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 14:19:36 by jhenriqu          #+#    #+#             */
-/*   Updated: 2021/02/04 18:47:00 by jhenriqu         ###   ########.fr       */
+/*   Updated: 2021/02/09 23:30:49 by jhenriqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #  define BUFFER_SIZE 0
 # endif
 
-typedef struct	s_get_next_line
+typedef struct s_get_next_line
 {
 	int			r;
 	char		*buf;
@@ -29,7 +29,7 @@ typedef struct	s_get_next_line
 	int			check;
 }				t_gnl;
 
-int				get_next_line_bonus(int fd, char **line);
+int				get_next_line(int fd, char **line);
 char			*ft_strjoin(char *s1, char *s2);
 char			*ft_substr(char *s, unsigned int start, size_t len);
 char			*ft_strdup(char *src);
