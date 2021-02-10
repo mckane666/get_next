@@ -69,7 +69,7 @@ int	get_next_line(int fd, char **line)
 	next.check = 0;
 	next.buf = malloc(sizeof(char *) * BUFFER_SIZE + 1);
 	if (!(next.buf) || (fd < 0 || fd == 1 || fd == 2 || !line
-		|| BUFFER_SIZE <= 0 || read(fd, 0, 0) == -1))
+				|| BUFFER_SIZE <= 0 || read(fd, 0, 0) == -1))
 		return (-1);
 	next.r = read(fd, next.buf, BUFFER_SIZE);
 	while (next.r > 0)

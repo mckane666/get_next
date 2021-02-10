@@ -6,7 +6,7 @@
 /*   By: jhenriqu <jhenriqu@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 12:24:42 by jhenriqu          #+#    #+#             */
-/*   Updated: 2021/02/04 18:46:48 by jhenriqu         ###   ########.fr       */
+/*   Updated: 2021/02/10 12:36:25 by jhenriqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	get_next_line(int fd, char **line)
 	next.check = 0;
 	next.buf = malloc(sizeof(char *) * BUFFER_SIZE + 1);
 	if (!(next.buf) || (fd < 0 || fd == 1 || fd == 2 || !line
-		|| BUFFER_SIZE <= 0 || read(fd, 0, 0) == -1))
+				|| BUFFER_SIZE <= 0 || read(fd, 0, 0) == -1))
 		return (-1);
 	next.r = read(fd, next.buf, BUFFER_SIZE);
 	while (next.r > 0)
